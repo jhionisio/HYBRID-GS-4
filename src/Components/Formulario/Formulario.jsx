@@ -28,6 +28,9 @@ const FormularioDiario = () => {
       setDtInicio('');
       setDtTermino('');
       setPatientId('');
+
+      window.location.reload();
+
     } catch (error) {
       console.error('Erro ao criar agenda:', error);
       Alert.alert('Erro', 'Não foi possível criar a agenda. Por favor, tente novamente.');
