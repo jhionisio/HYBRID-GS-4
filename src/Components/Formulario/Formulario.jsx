@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert } from 'react-native';
 import axios from 'axios';
@@ -19,11 +20,14 @@ const FormularioDiario = () => {
         patientId
       };
 
-      await axios.post('http://localhost:9090/diary', diaryData);
+      await axios.post('https://gshybrid-b5908-default-rtdb.firebaseio.com/diary.json', diaryData);
 
-      Alert.alert('Sucesso', 'agenda criada com sucesso!');
-
-      window.location.reload();
+      Alert.alert('Sucesso', 'Agenda criada com sucesso!');
+      setNmRemedio('');
+      setDescricaoRemedio('');
+      setDtInicio('');
+      setDtTermino('');
+      setPatientId('');
     } catch (error) {
       console.error('Erro ao criar agenda:', error);
       Alert.alert('Erro', 'Não foi possível criar a agenda. Por favor, tente novamente.');

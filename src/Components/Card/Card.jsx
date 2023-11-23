@@ -11,7 +11,7 @@ const Card = ({ idAgenda, nmRemedio, descricaoRemedio, dtInicio, dtTermino, pati
     useEffect(() => {
         const fetchPatientName = async () => {
             try {
-                const response = await axios.get(`http://localhost:9090/patient/id/${patientId}`);
+                const response = await axios.get(`https://gshybrid-b5908-default-rtdb.firebaseio.com/patient/${patientId}.json`);
                 setPatientName(response.data.nmPaciente);
             } catch (error) {
                 console.error('Erro ao buscar o nome do paciente:', error);
@@ -23,7 +23,7 @@ const Card = ({ idAgenda, nmRemedio, descricaoRemedio, dtInicio, dtTermino, pati
 
     const handleDelete = async (idAgenda) => {
         try {
-            await axios.delete(`http://localhost:9090/diary/${idAgenda}`);
+            await axios.delete(`https://gshybrid-b5908-default-rtdb.firebaseio.com/diary/${idAgenda}.json`);
             setRefresh();
         } catch (error) {
             console.error('Erro ao excluir registro da agenda:', error);
@@ -40,7 +40,7 @@ const Card = ({ idAgenda, nmRemedio, descricaoRemedio, dtInicio, dtTermino, pati
                 patientName,
             };
 
-            await axios.put(`http://localhost:9090/diary/${idAgenda}`, updatedDetails);
+            await axios.put(`https://gshybrid-b5908-default-rtdb.firebaseio.com/diary/${idAgenda}.json`, updatedDetails);
             setIsEditing(false);
             setRefresh();
         } catch (error) {

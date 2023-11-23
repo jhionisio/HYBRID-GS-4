@@ -9,8 +9,14 @@ const Listagem = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:9090/diary/list');
-                setDiaryDetails(response.data);
+                const response = await axios.get('https://gshybrid-b5908-default-rtdb.firebaseio.com/diary.json');
+                if (response.data) {
+                    const diaryArray = Object.keys(response.data).map((key) => ({
+                        idAgenda: key,
+                        ...response.data[key],
+                    }));
+                    setDiaryDetails(diaryArray);
+                }
             } catch (error) {
                 console.error('Erro ao buscar os detalhes da agenda:', error);
             }
@@ -20,7 +26,7 @@ const Listagem = () => {
     }, [refresh]);
 
     const handleRefresh = () => {
-        setRefresh(prevState => !prevState);
+        setRefresh((prevState) => !prevState);
     };
 
     return (
